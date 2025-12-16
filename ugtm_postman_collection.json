@@ -1,6 +1,8 @@
 {
     "info": {
+        "_postman_id": "ugtm-api-collection",
         "name": "UGTM API",
+        "description": "API endpoints for the UGTM mobile app.",
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
     },
     "item": [
@@ -54,7 +56,7 @@
             "response": []
         },
         {
-            "name": "Get Categories",
+            "name": "Get All Categories",
             "request": {
                 "method": "GET",
                 "header": [
@@ -81,7 +83,7 @@
     "variable": [
         {
             "key": "base_url",
-            "value": "http://ugtr-backend.test",
+            "value": "http://127.0.0.1:8000",
             "type": "string"
         }
     ]
