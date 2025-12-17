@@ -15,7 +15,18 @@ class RegisterController extends Controller
         if (Auth::check()) {
             return redirect()->route('profile.show');
         }
-        $locations = config('locations.Larache');
+        
+        // Fetch schools grouped by commune
+        $schools = \App\Models\School::all();
+        $locations = [];
+        
+        foreach ($schools as $school) {
+            $locations[$school->commune][] = $school->name;
+        }
+        
+        // Sort communes alphabetically
+        ksort($locations);
+        
         return view('auth.register', compact('locations'));
     }
 
