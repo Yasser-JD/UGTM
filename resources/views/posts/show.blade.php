@@ -97,18 +97,45 @@
                                     activeSlide: 0, 
                                     slides: @json($images),
                                     timer: null,
+                                    autoSlide: true,
                                     startTimer() {
+                                        if (!this.autoSlide) return;
                                         this.timer = setInterval(() => {
                                             this.activeSlide = this.activeSlide === this.slides.length - 1 ? 0 : this.activeSlide + 1;
                                         }, 2000);
                                     },
                                     stopTimer() {
                                         clearInterval(this.timer);
+                                    },
+                                    touchStartX: 0,
+                                    touchEndX: 0,
+                                    handleTouchStart(e) {
+                                        this.touchStartX = e.changedTouches[0].screenX;
+                                    },
+                                    handleTouchEnd(e) {
+                                        this.touchEndX = e.changedTouches[0].screenX;
+                                        this.handleSwipe();
+                                    },
+                                    handleSwipe() {
+                                        if (this.touchEndX < this.touchStartX - 50) {
+                                            this.stopAutoSlide();
+                                            this.activeSlide = this.activeSlide === 0 ? this.slides.length - 1 : this.activeSlide - 1; // Swipe Left -> Previous
+                                        }
+                                        if (this.touchEndX > this.touchStartX + 50) {
+                                            this.stopAutoSlide();
+                                            this.activeSlide = this.activeSlide === this.slides.length - 1 ? 0 : this.activeSlide + 1; // Swipe Right -> Next
+                                        }
+                                    },
+                                    stopAutoSlide() {
+                                        this.autoSlide = false;
+                                        this.stopTimer();
                                     }
                                  }'
                                  x-init="startTimer()"
                                  @mouseenter="stopTimer()"
-                                 @mouseleave="startTimer()">
+                                 @mouseleave="if(autoSlide) startTimer()"
+                                 @touchstart="handleTouchStart($event)"
+                                 @touchend="handleTouchEnd($event)">
                                 
                                 <!-- Slides -->
                                 <template x-for="(slide, index) in slides" :key="index">
@@ -168,15 +195,35 @@
                                     </h3>
                                     <div class="space-y-3">
                                         @foreach($attachments as $attachment)
-                                            <a href="{{ Storage::url($attachment) }}" target="_blank" class="flex items-center justify-between bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition border border-gray-100 group">
-                                                <div class="flex items-center gap-3">
-                                                    <div class="w-10 h-10 bg-red-50 text-red-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition">
-                                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                                            @if(Auth::check() && Auth::user()->is_active)
+                                                <a href="{{ Storage::url($attachment) }}" target="_blank" class="flex items-center justify-between bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition border border-gray-100 group">
+                                                    <div class="flex items-center gap-3">
+                                                        <div class="w-10 h-10 bg-red-50 text-red-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition">
+                                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                                                        </div>
+                                                        <span class="font-medium text-gray-700 group-hover:text-ugtm-purple transition" dir="ltr">{{ basename($attachment) }}</span>
                                                     </div>
-                                                    <span class="font-medium text-gray-700 group-hover:text-ugtm-purple transition" dir="ltr">{{ basename($attachment) }}</span>
+                                                    <svg class="w-5 h-5 text-gray-400 group-hover:text-ugtm-purple transition rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                                </a>
+                                            @else
+                                                <div class="flex items-center justify-between bg-gray-50 p-4 rounded-lg border border-gray-200">
+                                                    <div class="flex items-center gap-3">
+                                                        <div class="w-10 h-10 bg-gray-200 text-gray-500 rounded-lg flex items-center justify-center">
+                                                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                                                        </div>
+                                                        <div>
+                                                            <span class="font-medium text-gray-700 block" dir="ltr">{{ basename($attachment) }}</span>
+                                                            <span class="text-xs text-red-500 font-bold">
+                                                                @if(Auth::check())
+                                                                    عذراً، يجب أن تكون عضواً مفعلاً لتحميل هذا الملف.
+                                                                @else
+                                                                    عذراً، يجب تسجيل الدخول وتفعيل العضوية لتحميل الملف.
+                                                                @endif
+                                                            </span>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <svg class="w-5 h-5 text-gray-400 group-hover:text-ugtm-purple transition rtl:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                                            </a>
+                                            @endif
                                         @endforeach
                                     </div>
                                 </div>

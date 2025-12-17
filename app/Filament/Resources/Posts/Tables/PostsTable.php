@@ -17,26 +17,27 @@ class PostsTable
         return $table
             ->columns([
                 TextColumn::make('category.name')
-                    ->label('Category')
+                    ->label('التصنيف')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('title')
-                    ->label('Title')
+                    ->label('العنوان')
                     ->searchable()
                     ->sortable(),
                 IconColumn::make('is_published')
-                    ->label('Published')
+                    ->label('منشور')
                     ->boolean()
                     ->sortable(),
                 IconColumn::make('is_urgent')
-                    ->label('Urgent')
+                    ->label('عاجل')
                     ->boolean()
                     ->sortable(),
                 TextColumn::make('created_at')
-                    ->label('Date of Publishing')
+                    ->label('تاريخ النشر')
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('updated_at')
+                    ->label('تاريخ التحديث')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

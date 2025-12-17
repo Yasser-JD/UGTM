@@ -40,7 +40,7 @@
                 <a href="/" class="flex items-center gap-3 group">
                     <img src="/images/logo-FAE.png" alt="FAE Logo" style="width: 80px; height: auto;" class="h-16 w-auto transition transform group-hover:scale-120">
                     <div class="flex flex-col">
-                        <span class="text-2xl font-black text-navy-900 tracking-tight leading-none group-hover:text-ugtm-purple transition">FAE</span>
+                        <span class="text-2xl font-black text-navy-900 tracking-tight leading-none group-hover:text-ugtm-purple transition">FAE-UGTM</span>
                         <span class="text-xs font-bold text-gray-500 tracking-widest uppercase group-hover:text-navy-900 transition">Education</span>
                     </div>
                 </a>
@@ -109,7 +109,11 @@
                 <h3 class="text-xl font-bold mb-4">روابط سريعة</h3>
                 <ul class="space-y-2 text-gray-400">
                     <li><a href="/" class="hover:text-white">الرئيسية</a></li>
+                    <li><a href="{{ route('about') }}" class="hover:text-white">من نحن</a></li>
                     <li><a href="{{ route('contact') }}" class="hover:text-white">اتصل بنا</a></li>
+                    <li><a href="{{ route('login') }}" class="hover:text-white">تسجيل الدخول</a></li>
+                    <li><a href="{{ route('register') }}" class="hover:text-white">انخراط</a></li>
+                    <li><a href="{{ route('complaints.create') }}" class="hover:text-white">تقديم شكاية</a></li>
                 </ul>
 
             </div>
@@ -125,5 +129,29 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            @if(session('success'))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'نجاح!',
+                    text: "{{ session('success') }}",
+                    confirmButtonText: 'حسناً',
+                    confirmButtonColor: '#4c1d95'
+                });
+            @endif
+
+            @if(session('error'))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'خطأ!',
+                    text: "{{ session('error') }}",
+                    confirmButtonText: 'حسناً',
+                    confirmButtonColor: '#d33'
+                });
+            @endif
+        });
+    </script>
 </body>
 </html>

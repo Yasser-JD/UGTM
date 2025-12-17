@@ -22,6 +22,12 @@ class PostResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'title';
 
+    protected static ?string $navigationLabel = 'المقالات';
+    
+    protected static ?string $pluralModelLabel = 'المقالات';
+    
+    protected static ?string $modelLabel = 'مقال';
+
     public static function form(Schema $schema): Schema
     {
         return PostForm::configure($schema);

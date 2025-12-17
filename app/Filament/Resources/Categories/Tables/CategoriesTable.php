@@ -15,17 +15,22 @@ class CategoriesTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label('الاسم')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('slug')
+                    ->label('الرابط')
                     ->searchable(),
                 TextColumn::make('color')
+                    ->label('اللون')
                     ->searchable(),
                 TextColumn::make('created_at')
+                    ->label('تاريخ الإنشاء')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label('تاريخ التحديث')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

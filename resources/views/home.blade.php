@@ -11,7 +11,9 @@
             'url' => route('posts.show', $p->slug)
         ])->toJson() !!},
         timer: null,
+        autoSlide: true,
         startTimer() {
+            if (!this.autoSlide) return;
             this.timer = setInterval(() => {
                 this.nextSlide();
             }, 5000);
@@ -24,8 +26,32 @@
         },
         prevSlide() {
             this.activeSlide = this.activeSlide === 0 ? this.slides.length - 1 : this.activeSlide - 1;
+        },
+        touchStartX: 0,
+        touchEndX: 0,
+        handleTouchStart(e) {
+            this.touchStartX = e.changedTouches[0].screenX;
+        },
+        handleTouchEnd(e) {
+            this.touchEndX = e.changedTouches[0].screenX;
+            this.handleSwipe();
+        },
+        handleSwipe() {
+            if (this.touchEndX < this.touchStartX - 50) {
+                this.stopAutoSlide();
+                this.prevSlide(); // Swipe Left -> Previous
+            }
+            if (this.touchEndX > this.touchStartX + 50) {
+                this.stopAutoSlide();
+                this.nextSlide(); // Swipe Right -> Next
+            }
+        },
+        stopAutoSlide() {
+            this.autoSlide = false;
+            this.stopTimer();
         }
-    }' x-init="startTimer()" @mouseenter="stopTimer()" @mouseleave="startTimer()">
+    }' x-init="startTimer()" @mouseenter="stopTimer()" @mouseleave="if(autoSlide) startTimer()" 
+       @touchstart="handleTouchStart($event)" @touchend="handleTouchEnd($event)">
         
         <!-- Slides -->
         <template x-for="(slide, index) in slides" :key="slide.id">

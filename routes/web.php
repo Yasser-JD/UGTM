@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/posts/{slug}', [PostController::class, 'show'])->name('posts.show');
 Route::get('/categories/{slug}', [App\Http\Controllers\CategoryController::class, 'show'])->name('categories.show');
 Route::get('/search', [App\Http\Controllers\SearchController::class, 'index'])->name('search');
@@ -26,6 +26,18 @@ Route::get('/debug-post', function () {
         'image_content' => $post->image,
         'raw_image' => $post->getRawOriginal('image'),
     ];
+});
+
+Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);
+Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
+Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/complaints/create', [App\Http\Controllers\ComplaintController::class, 'create'])->name('complaints.create');
+    Route::post('/complaints', [App\Http\Controllers\ComplaintController::class, 'store'])->name('complaints.store');
 });
 
 

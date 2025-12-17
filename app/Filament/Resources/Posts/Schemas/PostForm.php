@@ -17,29 +17,37 @@ class PostForm
             ->components([
                 Select::make('category_id')
                     ->relationship('category', 'name')
+                    ->label('التصنيف')
                     ->required(),
                 TextInput::make('title')
+                    ->label('العنوان')
                     ->required(),
                 TextInput::make('slug')
+                    ->label('الرابط (Slug)')
                     ->required(),
                 Textarea::make('content')
+                    ->label('المحتوى')
                     ->columnSpanFull(),
                 FileUpload::make('image')
+                    ->label('الصورة')
                     ->image()
                     ->multiple()
                     ->reorderable(),
                 FileUpload::make('attachment')
+                    ->label('المرفقات')
                     ->directory('attachments')
                     ->acceptedFileTypes(['application/pdf'])
                     ->multiple()
                     ->downloadable()
                     ->openable(),
                 Toggle::make('is_published')
+                    ->label('منشور')
                     ->required(),
                 Toggle::make('is_urgent')
+                    ->label('عاجل')
                     ->required(),
                 Toggle::make('is_featured')
-                    ->label('Feature on Homepage')
+                    ->label('مميز في الصفحة الرئيسية')
                     ->required(),
             ]);
     }

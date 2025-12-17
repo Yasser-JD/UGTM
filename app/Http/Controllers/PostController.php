@@ -12,7 +12,11 @@ class PostController extends Controller
     {
         $post = Post::where('slug', $slug)
             ->where('is_published', true)
-            ->firstOrFail();
+            ->first();
+
+        if (!$post) {
+            return view('posts.unavailable');
+        }
 
         $memos = Post::whereHas('category', function ($query) {
                 $query->where('slug', 'memos');
