@@ -36,8 +36,11 @@ Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logou
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/card', [App\Http\Controllers\ProfileController::class, 'card'])->name('profile.card');
     Route::get('/complaints/create', [App\Http\Controllers\ComplaintController::class, 'create'])->name('complaints.create');
     Route::post('/complaints', [App\Http\Controllers\ComplaintController::class, 'store'])->name('complaints.store');
 });
+
+Route::get('/verify/{id}', [App\Http\Controllers\VerificationController::class, 'verify'])->name('verification.verify')->middleware('signed');
 
 

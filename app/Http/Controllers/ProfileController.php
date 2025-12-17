@@ -19,4 +19,13 @@ class ProfileController extends Controller
 
         return view('profile.show', compact('user'));
     }
+
+    public function card()
+    {
+        $user = Auth::user();
+        if (!$user->is_active) {
+            return redirect()->route('profile.show')->with('error', 'عذراً، بطاقة العضوية متاحة فقط للأعضاء المفعلين.');
+        }
+        return view('profile.card', compact('user'));
+    }
 }

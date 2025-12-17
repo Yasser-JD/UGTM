@@ -73,6 +73,10 @@
                                     <svg class="w-8 h-8 text-ugtm-purple mx-auto mb-2 group-hover:scale-110 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
                                     <span class="font-bold text-gray-700">إرسال شكاية</span>
                                 </a>
+                                <a href="{{ route('profile.card') }}" class="bg-gray-50 p-4 rounded-xl border border-gray-200 text-center hover:shadow-md transition cursor-pointer group">
+                                    <svg class="w-8 h-8 text-ugtm-purple mx-auto mb-2 group-hover:scale-110 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+                                    <span class="font-bold text-gray-700">بطاقة العضوية</span>
+                                </a>
                             </div>
                         </div>
                     @endif

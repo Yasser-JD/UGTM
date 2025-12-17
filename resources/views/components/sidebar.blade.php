@@ -58,6 +58,9 @@
             <button type="submit" class="w-full bg-ugtm-purple text-white py-2 rounded-lg font-bold hover:bg-navy-900 transition shadow-md">
                 دخول
             </button>
+            @error('rental_number')
+                <p class="text-red-500 text-xs mt-2 font-bold">{{ $message }}</p>
+            @enderror
             <div class="text-center text-xs text-gray-500 mt-2">
                 ليس لديك حساب؟ <a href="{{ route('register') }}" class="text-ugtm-purple hover:underline font-bold">انخرط الآن</a>
             </div>
