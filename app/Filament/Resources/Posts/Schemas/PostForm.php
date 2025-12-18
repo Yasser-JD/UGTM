@@ -31,6 +31,8 @@ class PostForm
                 FileUpload::make('image')
                     ->label('الصورة')
                     ->image()
+                    ->directory('posts')
+                    ->visibility('public')
                     ->multiple()
                     ->reorderable(),
                 FileUpload::make('attachment')
