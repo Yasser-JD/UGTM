@@ -22,7 +22,7 @@
                             @if($user->is_active)
                                 <span class="bg-ugtm-purple text-white px-4 py-2 rounded-full font-bold shadow-sm">منخرط</span>
                             @else
-                                <span class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full font-bold border border-yellow-200">في انتظار التفعيل</span>
+                                <span class="bg-yellow-100 text-yellow-800 px-3 py-1 md:px-4 md:py-2 text-sm md:text-base rounded-full font-bold border border-yellow-200">في انتظار التفعيل</span>
                             @endif
                         </div>
                     </div>
