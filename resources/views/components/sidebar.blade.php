@@ -47,7 +47,7 @@
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">كلمة المرور</label>
-                <input type="password" name="password" required class="w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-3 focus:outline-none focus:border-ugtm-purple focus:ring-1 focus:ring-ugtm-purple transition text-sm">
+                <input type="password" name="password" required autocomplete="current-password" class="w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-3 focus:outline-none focus:border-ugtm-purple focus:ring-1 focus:ring-ugtm-purple transition text-sm">
             </div>
             <div class="flex items-center">
                 <input type="checkbox" name="remember" id="remember_sidebar" class="h-3.5 w-3.5 text-ugtm-purple focus:ring-ugtm-purple border-gray-300 rounded">

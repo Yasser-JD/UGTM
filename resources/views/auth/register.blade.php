@@ -166,7 +166,7 @@
                 <!-- Password -->
                 <div>
                     <label for="password" class="block text-sm font-medium text-gray-700 mb-1">كلمة المرور</label>
-                    <input type="password" name="password" id="password" x-model="formData.password" @blur="validate('password')" @input="validate('password'); validate('password_confirmation')" required 
+                    <input type="password" name="password" id="password" x-model="formData.password" @blur="validate('password')" @input="validate('password'); validate('password_confirmation')" required autocomplete="new-password"
                            class="w-full px-4 py-2 rounded-lg border focus:ring-2 transition"
                            :class="getInputClass('password')">
                     <span x-show="isInvalid('password')" x-text="errors.password" class="text-red-500 text-sm mt-1 block"></span>
@@ -176,7 +176,7 @@
                 <!-- Confirm Password -->
                 <div>
                     <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-1">تأكيد كلمة المرور</label>
-                    <input type="password" name="password_confirmation" id="password_confirmation" x-model="formData.password_confirmation" @blur="validate('password_confirmation')" @input="validate('password_confirmation')" required 
+                    <input type="password" name="password_confirmation" id="password_confirmation" x-model="formData.password_confirmation" @blur="validate('password_confirmation')" @input="validate('password_confirmation')" required autocomplete="new-password"
                            class="w-full px-4 py-2 rounded-lg border focus:ring-2 transition"
                            :class="getInputClass('password_confirmation')">
                     <span x-show="isInvalid('password_confirmation')" x-text="errors.password_confirmation" class="text-red-500 text-sm mt-1 block"></span>
