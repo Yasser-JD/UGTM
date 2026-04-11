@@ -9,6 +9,17 @@ use Illuminate\Support\Facades\Auth;
 
 class ComplaintController extends Controller
 {
+    public function index(Request $request)
+    {
+        $complaints = Complaint::where('user_id', $request->user()->id)
+            ->latest()
+            ->get();
+
+        return response()->json([
+            'data' => $complaints
+        ], 200);
+    }
+
     public function store(Request $request)
     {
         $request->validate([
