@@ -15,19 +15,6 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
-Route::get('/debug-post', function () {
-    $post = \App\Models\Post::latest()->first();
-    if (!$post) return 'No posts found.';
-    
-    return [
-        'title' => $post->title,
-        'image_type' => gettype($post->image),
-        'image_count' => is_array($post->image) ? count($post->image) : 1,
-        'image_content' => $post->image,
-        'raw_image' => $post->getRawOriginal('image'),
-    ];
-});
-
 Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);
 Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
