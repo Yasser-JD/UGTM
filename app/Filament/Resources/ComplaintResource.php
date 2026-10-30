@@ -44,7 +44,7 @@ class ComplaintResource extends Resource
     {
         return $schema
             ->components([
-                Section::make('معلومات المنخرط')
+            Section::make('معلومات المنخرط')
                     ->schema([
                         Forms\Components\Placeholder::make('user_name')
                             ->label('الاسم')
