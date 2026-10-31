@@ -13,7 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->trustProxies(at: '*');
-        $middleware->trustHosts(at: ['fae-ugtm.ma']);
+        $middleware->trustHosts(at: ['kk.fae-ugtm.ma']);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

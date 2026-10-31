@@ -1,6 +1,7 @@
 *.log
 .DS_Store
 .env
+.env.example
 .env.backup
 .env.production
 .phpactor.json
@@ -22,3 +23,11 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Excel data & helper scripts
+*.xlsx
+*.xls
+*.csv
+inspect_*.py
+generate_*.py
+__pycache__/
